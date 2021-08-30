@@ -1,0 +1,31 @@
+<h1 style="text-align: center;">Winkelwagen</h1>
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+  <div class="table-container" role="table" aria-label="Gereedschap" formArrayName="cartitems" >
+    <div class="flex-table header" role="rowgroup">
+    <div class="flex-row first" role="columnheader">Gereedschap</div>
+    <div class="flex-row" role="columnheader">Aantal</div>
+    <div class="flex-row" role="columnheader">Prijs</div>
+    <div class="flex-row" role="columnheader">Subtotaal</div>
+    <div class="flex-row" role="columnheader"></div>
+  </div>
+
+    <div class="flex-table row" role="rowgroup" *ngFor="let item of form.controls.cartitems?.value; let i = index" [formGroupName]="i">
+      <div class="flex-row first" role="cell">{{  item.name }}</div>
+        <div class="flex-row" role="cell"><ngx-number-spinner (ngModelChange)="onUpdate($event, item.name)" formControlName="quantity" [min]="1" [max]="9">
+          <input placeholder="1" formControlName="quantity">
+        </ngx-number-spinner></div>
+        <div class="flex-row" role="cell">€ {{ item.price }}</div>
+        <div class="flex-row" role="cell">€ {{ item.subtotal }}</div>
+        <div class="flex-row" role="cell"><button (click)="onDelete(item.name)">Delete</button></div>
+      </div>
+      <div class="flex-table row" role="rowgroup">
+      <div class="flex-row" role="cell"></div>
+      <div class="flex-row" role="cell"></div>
+      <div class="flex-row" role="cell"></div>
+      <div class="flex-row" role="cell">total: € {{ total }}</div>
+      <div class="flex-row" role="cell"></div>
+    </div>
+  </div>
+</form>

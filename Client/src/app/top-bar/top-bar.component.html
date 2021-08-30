@@ -1,0 +1,31 @@
+<div class="example-container" [class.example-is-mobile]="mobileQuery.matches" *ngIf="shouldRun">
+	<mat-toolbar color="" class="example-toolbar">
+	  <button mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
+	  <h1 class="example-app-name">ToolsForEver</h1>
+	  <a [routerLink]="['/']" mat-button><i class="material-icons">home</i>Home</a>
+	  <a routerLink="/add-product" mat-button><i class="material-icons">create</i>Create</a>
+	  <a routerLink="/" mat-button><i class="material-icons">account_box</i>Login</a>
+      <a routerLink="/cart" mat-button><i class="material-icons">shopping_cart</i>Uitchecken</a>
+	</mat-toolbar>
+  
+	<mat-sidenav-container class="example-sidenav-container" 
+						   [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
+	  <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'"
+				   [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
+		<mat-nav-list>
+			<a routerLink="/" mat-button><i class="material-icons">home</i>Home</a><br> 
+			<a routerLink="/add-product" mat-button><i class="material-icons">account_box</i>Create</a><br>
+        	<a routerLink="/cart" mat-button><i class="material-icons">shopping_cart</i>Uitchecken</a>
+		</mat-nav-list>
+	  </mat-sidenav>
+  
+	  <mat-sidenav-content>
+		<router-outlet></router-outlet>
+	  </mat-sidenav-content>
+	</mat-sidenav-container>
+  </div>
+<!-- 
+Copyright Google LLC. All Rights Reserved.
+Use of this source code is governed by an MIT-style license that
+can be found in the LICENSE file at https://angular.io/license
+-->

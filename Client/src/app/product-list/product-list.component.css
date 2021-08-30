@@ -1,0 +1,26 @@
+.content {
+    padding: 16px;
+    margin-top: 20px;
+}
+
+img {
+    height: 180px;
+    width: 290px;
+    object-fit: scale-down;
+}
+
+.pr-desc {
+    text-align: left;
+}
+.pricetag {
+    text-align: left;
+    color: red;
+    font-size: 20px;
+}
+h2 {
+    text-align: center;
+}
+
+.itembox {
+    margin-top: 20px;
+}

@@ -1,0 +1,64 @@
+<h2>Products</h2>
+
+<div fxLayout="row wrap" fxLayoutAlign="center top">
+  <div fxFlex="25%">
+    <input [(ngModel)]='Tool' placeholder="Zoeken...">
+    <button type="button" (click)="onToolFilter()">Zoek</button>
+    <button type="button" (click)="onToolFilterClear()">Leeg</button>
+  </div>
+  <div fxFlex="10%">  
+    <label>sorteer op: </label>
+    <div fxFlex="5%">
+    <select [(ngModel)] = 'sortByParam'>
+      <option value="name">name</option>
+      <option value="price">price</option>
+    </select>
+  </div>
+  </div>
+  <div fxFlex="20%">
+    <label>Gereedschap: </label>
+    <div fxFlex="10%">
+      <select (click)="filterToolCategory">
+        <option value="handgereedschap">handgereedschap</option>
+        <option value="Electrische gereedschap">Electrische gereedschap</option>
+      </select>
+    </div>
+  </div>
+</div>
+
+  <div class="content">
+    <div *ngFor="let product of products|filter:searchTool:'name'|sort:[sortByParam, 'desc']|filter:filterToolCategory:'Category'">
+    <div  class="itembox" fxLayout="row wrap" fxLayoutAlign="center top" fxLayoutGap="200px grid"> 
+      <div fxFlex="15%" fxFlex.md="25%"fxFlex.xs="40%" fxFlex.sm="80%">
+        <h3>
+          <a
+            [title]="product.name + ' details'"
+            [routerLink]="['/products', product.id]"
+          >
+            <img *ngIf="product.image" mat-card-image src="/api/images/{{product.image}}" alt="">
+            <img *ngIf="!product.image" mat-card-image src="../../assets/Images/kruis.jpg" alt="">
+          </a><br>
+        </h3>
+      </div>
+      <div fxFlex="20%" fxFlex.xs="10%" fxFlex.sm="10%">
+        <h3> 
+          <p class="pr-desc" *ngIf="product.description">
+            {{ product.name }}
+          </p>
+          <p class="pr-desc" *ngIf="product.description">
+            {{ product.description }}
+          </p>
+        </h3>
+      </div>
+      <div fxFlex="20%" fxFlex.xs="10%" fxFlex.sm="10%">
+        <h3>
+          <p class="pricetag">€ {{ product.price }}</p>
+          <div fxLayoutAlign="left bottom">
+            <button (click)="addToCart(product)">Buy</button>
+          </div>
+        </h3>
+      </div>
+      </div>
+    </div>
+    </div>    
+
